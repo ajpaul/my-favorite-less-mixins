@@ -1,0 +1,164 @@
+//These are some of my favorite LESS mixins
+//This is a work in progress
+
+//helpful variables
+@mobileWidthMax: 767px;
+@tabletWidthMin: 769px;
+@tabletWidthMax: 1024px;
+@desktopWidthMin: 1025px;
+
+//variable manipulation
+@lightBlue:  #ddf;
+@defaultThemeColor:@lightBlue;
+@borderColor:@defaultThemeColor - #222;
+
+//color functions
+//darken()
+//lighten()
+//saturate()
+//desaturate()
+//fadein()
+//fadeout()
+
+//example:
+@borderColor:darken(desaturate(@defaultThemeColor, 100%), 20%);
+
+//mixins
+
+//no highlight on text/anchors 
+.preventHighlight {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+//helpful list styling
+.basic-list {
+	margin-left: 0px; padding: 0; list-style: none;
+    li { margin-bottom: 0px; }
+}
+
+//border radius
+.radius(@radius: 3px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
+
+//truncate text
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+//ease transition
+.ease (@duration: 200ms, @property: all, @delay: 0ms) {
+    -webkit-transition: @property @duration ease @delay;
+    -moz-transition: @property @duration ease @delay;
+    -ms-transition: @property @duration ease @delay;
+    -o-transition: @property @duration ease @delay;
+    transition: @property @duration ease @delay;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+//transform
+.transform(@x: 0, @y: 0, @z: 0) {
+    -webkit-transform: translate3d(@x,@y,@z);
+    -moz-transform: translate3d(@x,@y,@z);
+    -ms-transform: translate3d(@x,@y,@z);
+    -o-transform: translate3d(@x,@y,@z);
+    transform: translate3d(@x,@y,@z);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+//block text selection
+.no-select () {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+//change opacity
+.opacity(@opacity: 1) {
+    @opacityPercentage: @opacity * 100;
+    -webkit-opacity: @opacity;
+    -moz-opacity: @opacity;
+    opacity: @opacity;
+    -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(Opacity='@{opacityPercentage}')";
+    filter: ~"alpha(opacity=@{opacityPercentage})";
+}
+
+//add a fixed shadow affect to an element
+.shadow() {
+    -webkit-box-shadow: 0px 0px 20px 3px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 0px 20px 3px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 20px 3px rgba(0,0,0,0.1);
+}
+
+//parameterized text-shadow
+.text-shadow (@string: 0 1px 3px rgba(0, 0, 0, 0.25)) {
+	text-shadow: @string;
+}
+
+//parameterized box-shadow
+.box-shadow (@string) {
+	-webkit-box-shadow: @string;
+	-moz-box-shadow:    @string;
+	box-shadow:         @string;
+}
+
+//parameterized drop-shadow
+.drop-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:		@x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+
+////parameterized inner-shadow
+.inner-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow: inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:    inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:         inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+
+//box-sizing mixin
+.box-sizing (@type: border-box) {
+	-webkit-box-sizing: @type;
+	-moz-box-sizing:    @type;
+	box-sizing:         @type;
+}
+
+//gradient
+.gradient (@startColor: #eee, @endColor: white) {
+	background-color: @startColor;
+	background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+	background: -webkit-linear-gradient(top, @startColor, @endColor);
+	background: -moz-linear-gradient(top, @startColor, @endColor);
+	background: -ms-linear-gradient(top, @startColor, @endColor);
+	background: -o-linear-gradient(top, @startColor, @endColor);
+}
+
+//apply horizontal gradient
+.horizontal-gradient (@startColor: #eee, @endColor: white) {
+ 	background-color: @startColor;
+	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+	background-image: -webkit-linear-gradient(left, @startColor, @endColor);
+	background-image: -moz-linear-gradient(left, @startColor, @endColor);
+	background-image: -ms-linear-gradient(left, @startColor, @endColor);
+	background-image: -o-linear-gradient(left, @startColor, @endColor);
+}
